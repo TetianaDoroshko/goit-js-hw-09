@@ -18,8 +18,12 @@ function onSubmitClick(event) {
 
     let delay = Number(refs.delayInput.value);
     createPromise(promiseCounter, delay)
-      .then(value => Notify.success(value))
-      .catch(error => Notify.failure(error));
+      .then(({ position, delay }) =>
+        Notify.success(`✔️ Fulfilled promise ${position} in ${delay}ms`)
+      )
+      .catch(({ position, delay }) =>
+        Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`)
+      );
     const intervalID = setInterval(() => {
       if (promiseCounter === Number(refs.amountInput.value)) {
         clearInterval(intervalID);
@@ -28,20 +32,22 @@ function onSubmitClick(event) {
       promiseCounter += 1;
       delay += Number(refs.stepInput.value);
       createPromise(promiseCounter, delay)
-        .then(value => Notify.success(value))
-        .catch(error => Notify.failure(error));
+        .then(({ position, delay }) =>
+          Notify.success(`✔️ Fulfilled promise ${position} in ${delay}ms`)
+        )
+        .catch(({ position, delay }) =>
+          Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`)
+        );
     }, refs.stepInput.value);
   }, refs.delayInput.value);
-
-  // console.log(event.currentTarget.elements);
 }
 function createPromise(position, delay) {
   const shouldResolve = Math.random() > 0.3;
   return new Promise((resolve, reject) => {
     if (shouldResolve) {
-      resolve(`✔️ Fulfilled promise ${position} in ${delay}ms`);
+      resolve({ position, delay });
     } else {
-      reject(`❌ Rejected promise ${position} in ${delay}ms`);
+      reject({ position, delay });
     }
   });
 }
