@@ -6,7 +6,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 const refs = {
   startBtn: document.querySelector('[data-start]'),
   daysSpan: document.querySelector('[data-days]'),
-  hoursSpan: document.querySelector('[data-hours'),
+  hoursSpan: document.querySelector('[data-hours]'),
   minutesSpan: document.querySelector('[data-minutes]'),
   secondsSpan: document.querySelector('[data-seconds]'),
 };
