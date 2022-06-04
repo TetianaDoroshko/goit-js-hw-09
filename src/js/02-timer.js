@@ -21,7 +21,7 @@ const options = {
   },
 };
 
-const flatpickr = flatpickr('#datetime-picker', options);
+const myFlatpickr = flatpickr('#datetime-picker', options);
 
 refs.startBtn.disabled = true;
 
